@@ -10,5 +10,17 @@ module Safeword
     def enabled?
       @enabled
     end
+
+    # Enables the blocker, preventing blocks of code from being executed.
+    def enable
+      @enabled = true
+      self
+    end
+
+    # Disables the blocker, allowing blocks of code to be executed.
+    def disable
+      @enabled = false
+      self
+    end
   end
 end
