@@ -1,9 +1,12 @@
 module Safeword
   # Decides whether blocks of code are executed or not.
   class Blocker
+    #
     # Instantiates an enabled blocker.
-    def initialize
-      @enabled = true
+    #
+    # @param [Boolean] enabled Whether the blocker is enabled or not.
+    def initialize(enabled: true)
+      @enabled = enabled
     end
 
     # Whether the blocker is enabled or not. Enabled blockers prevent blocks of code from being executed.

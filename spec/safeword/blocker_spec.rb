@@ -70,8 +70,18 @@ RSpec.describe Safeword::Blocker do
   end
 
   describe '.new' do
-    it 'instantiates an enabled blocker' do
-      expect(described_class.new).to be_enabled
+    context 'when no parameters are passed in the constructor' do
+      it 'instantiates an enabled Blocker' do
+        instance = described_class.new
+        expect(instance).to be_enabled
+      end
+    end
+
+    context 'when initialized with enabled: false' do
+      it 'instantiates a disabled Blocker' do
+        instance = described_class.new(enabled: false)
+        expect(instance).not_to be_enabled
+      end
     end
   end
 end
