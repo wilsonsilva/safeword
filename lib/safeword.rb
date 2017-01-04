@@ -1,5 +1,10 @@
 require 'safeword/version'
+require 'safeword/blocker'
 
 # Encapsulates the logic of the gem.
-module SafeWord
+module Safeword
+  # Instantiates a +Blocker+.
+  def self.new
+    Blocker.new
+  end
 end
