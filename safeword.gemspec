@@ -10,8 +10,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Wilson Silva']
   spec.email         = ['me@wilsonsilva.net']
 
-  spec.summary       = 'Prevents dangerous behaviour from being executed.'
-  spec.description   = 'Prevents dangerous behaviour from being executed.'
+  spec.summary       = 'Prevents blocks of code from being executed until you consider them safe.'
+  spec.description   = 'Prevents blocks of code from being executed until you consider them safe.'
   spec.homepage      = 'https://github.com/wilsonsilva/safeword'
   spec.license       = 'MIT'
 
