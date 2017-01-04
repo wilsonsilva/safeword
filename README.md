@@ -62,6 +62,19 @@ safeword.disable
 safeword.use { puts 'drop bomb' } #=> drop bomb
 ```
 
+### Instantiating a disabled safeword
+Safewords are enabled by default, but can be disabled during initialization:
+
+```ruby
+require 'safeword'
+
+safe = Safeword.new
+safe.enabled? #=> true
+
+unsafe = Safeword.new(enabled: false)
+unsafe.enabled? #=> false
+```
+
 ### Chaining methods
 
 The methods `enable`, `disable` and `use` return the word itself, so you can chain multiple calls together:
