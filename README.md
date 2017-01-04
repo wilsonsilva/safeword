@@ -1,8 +1,7 @@
 # Safeword
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/safeword`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Prevents blocks of code from being executed until you consider them safe. Useful if you need to run untested code
+in the production console.
 
 ## Installation
 
@@ -22,20 +21,66 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Every new instance of Safeword is `enabled` by default. Enabled safewords prevent code from being executed.
+Disabled safewords allow it to be executed.
+
+To enable, disable and verifying if a safeword is enabled, you can use `enable`, `disable`
+and `enabled?` respectively:
+
+```ruby
+require 'safeword'
+
+safeword = Safeword.new
+safeword.enabled? # => true
+
+safeword.disable
+safeword.enabled? # => false
+
+safeword.enable
+safeword.enabled? # => true
+```
+
+### Preventing code from running
+
+Instantiate a `Safeword` and pass your wrapped code in a block to its `use` method.
+
+```ruby
+require 'safeword'
+
+safeword = Safeword.new
+safeword.use { puts 'start war' } #=> nothing happens
+safeword.disable
+safeword.use { puts 'drop bomb' } #=> drop bomb
+```
+
+### Chaining methods
+
+The methods `enable`, `disable` and `use` return the word itself, so you can chain multiple calls together:
+
+```ruby
+require 'safeword'
+
+Safeword.new
+  .disable
+  .use { puts 'start war' } #=> start war
+  .use { puts 'drop bomb' } #=> drop bomb
+  .enable
+  .use { puts 'cut fruit' } #=> nothing happens
+```
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests.
+You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the
+version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version,
+push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/safeword.
-
+Bug reports and pull requests are welcome on GitHub at https://github.com/wilsonsilva/safeword.
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
