@@ -22,5 +22,11 @@ module Safeword
       @enabled = false
       self
     end
+
+    # Ignores the provided block of code if enabled. Executes it otherwise.
+    def use
+      yield unless enabled?
+      self
+    end
   end
 end

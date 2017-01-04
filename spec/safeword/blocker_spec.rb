@@ -41,6 +41,34 @@ RSpec.describe Safeword::Blocker do
     end
   end
 
+  describe '#use' do
+    let(:dangerous_operation) { spy }
+
+    context 'when the blocker is enabled' do
+      before { blocker.instance_variable_set(:@enabled, true) }
+
+      it 'does not execute the code wrapped in the block' do
+        blocker.use { dangerous_operation.call }
+
+        expect(dangerous_operation).not_to have_received(:call)
+      end
+    end
+
+    context 'when the blocker is disabled' do
+      before { blocker.instance_variable_set(:@enabled, false) }
+
+      it 'executes the code wrapped in the block' do
+        blocker.use { dangerous_operation.call }
+
+        expect(dangerous_operation).to have_received(:call)
+      end
+    end
+
+    it 'returns self, allowing method chaining' do
+      expect(blocker.use).to eq(blocker)
+    end
+  end
+
   describe '.new' do
     it 'instantiates an enabled blocker' do
       expect(described_class.new).to be_enabled
