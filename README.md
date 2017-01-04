@@ -40,7 +40,7 @@ safeword.enable
 safeword.enabled? # => true
 ```
 
-### Preventing code from running
+### Preventing code execution
 
 Instantiate a `Safeword` and pass your wrapped code in a block to its `use` method.
 
@@ -49,6 +49,15 @@ require 'safeword'
 
 safeword = Safeword.new
 safeword.use { puts 'start war' } #=> nothing happens
+```
+
+### Allowing code execution
+Call `#disable` on the safeword to allow subsequent calls to `use` to execute the provided code blocks:
+
+```ruby
+require 'safeword'
+
+safeword = Safeword.new
 safeword.disable
 safeword.use { puts 'drop bomb' } #=> drop bomb
 ```
