@@ -1,5 +1,7 @@
 # Safeword
 
+[![Build Status](https://travis-ci.org/wilsonsilva/safeword.svg?branch=master)](https://travis-ci.org/wilsonsilva/safeword)
+
 Prevents blocks of code from being executed until you consider them safe. Useful if you need to run untested code
 in the production console.
 
